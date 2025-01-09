@@ -16,3 +16,10 @@ This service utilizes caching for faster responses and is designed with clean ar
 - `make test` runs the tests
 - `make run` runs the app locally on port 8090 without docker.
 - `make lint` runs the linter
+
+## Request examples
+
+```
+curl --location 'http://127.0.0.1:8090/api/v1/ltp'
+curl --location 'http://127.0.0.1:8090/api/v1/ltp?pairs=BTC/CHF,BTC/USD'
+```
