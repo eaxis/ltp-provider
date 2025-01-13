@@ -44,7 +44,7 @@ func TestIntegrationGetLTP(t *testing.T) {
 		err := srv.ListenAndServe()
 
 		if err != nil && !errors.Is(err, http.ErrServerClosed) {
-			t.Fatalf("Server failed: %v", err)
+			t.Errorf("Server failed: %v", err)
 		}
 	}()
 

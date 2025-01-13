@@ -12,6 +12,7 @@ with accuracy up to one minute for the following cryptocurrency pairs:
 This service utilizes caching for faster responses and is designed with clean architecture principles in mind.
 
 ## How to run
+
 - `make dc` runs docker-compose with the app container on port 8090.
 - `make test` runs the tests
 - `make run` runs the app locally on port 8090 without docker.

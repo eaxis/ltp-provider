@@ -13,7 +13,7 @@ type item struct {
 
 type LTPCache struct {
 	data       map[string]item
-	mu         sync.Mutex
+	mu         sync.RWMutex
 	expiration time.Duration
 }
 
@@ -25,8 +25,8 @@ func NewLTPCache(expiration time.Duration) *LTPCache {
 }
 
 func (s *LTPCache) Get(pair string) (*domain.Ltp, bool) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
 
 	entry, found := s.data[pair]
 
@@ -35,6 +35,9 @@ func (s *LTPCache) Get(pair string) (*domain.Ltp, bool) {
 	}
 
 	if time.Now().After(entry.expiresAt) {
+		s.mu.Lock()
+		defer s.mu.Unlock()
+
 		delete(s.data, pair)
 		return nil, false
 	}
